@@ -1,4 +1,4 @@
-package com.methodknowledgy.pcs;
+package com.methodknowledgy.gcs;
 
 public class PropertyChangeEvent<SourceType, PropertyType> {
 

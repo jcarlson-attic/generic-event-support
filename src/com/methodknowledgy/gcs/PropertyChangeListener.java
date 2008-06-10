@@ -1,4 +1,4 @@
-package com.methodknowledgy.pcs;
+package com.methodknowledgy.gcs;
 
 public interface PropertyChangeListener<SourceType, PropertyType> {
 

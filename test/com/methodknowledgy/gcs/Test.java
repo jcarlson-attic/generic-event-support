@@ -2,7 +2,7 @@ package com.methodknowledgy.gcs;
 
 public class Test {
 
-    private PropertyChangeSupport<Test> changes = new PropertyChangeSupport<Test>();
+    private GenericChangeSupport<Test> changes = new GenericChangeSupport<Test>();
     
     private String title;
     
@@ -18,7 +18,7 @@ public class Test {
         return title;
     }
     
-    public void addTitleListener(PropertyChangeListener<Test, String> listener) {
+    public void addTitleListener(GenericChangeListener<Test, String> listener) {
         changes.addChangeListener(listener);
     }
     
@@ -26,9 +26,9 @@ public class Test {
     
     public static void main(String[] args) {
         Test test = new Test();
-        PropertyChangeListener<Test, String> l = new PropertyChangeListener<Test, String>() {
+        GenericChangeListener<Test, String> l = new GenericChangeListener<Test, String>() {
 
-            public void onChange(PropertyChangeEvent<Test, String> change) {
+            public void onChange(GenericChangeEvent<Test, String> change) {
                 String v = change.getNewValue();
                 System.out.println(v);
             }

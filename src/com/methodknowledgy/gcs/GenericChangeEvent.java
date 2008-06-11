@@ -1,13 +1,13 @@
 package com.methodknowledgy.gcs;
 
-public class PropertyChangeEvent<SourceType, PropertyType> {
+public class GenericChangeEvent<SourceType, PropertyType> {
 
     private SourceType source;
     private String propertyName;
     private PropertyType oldValue;
     private PropertyType newValue;
 
-    public PropertyChangeEvent(SourceType source, String propertyName,
+    public GenericChangeEvent(SourceType source, String propertyName,
             PropertyType oldValue, PropertyType newValue) {
         this.source = source;
         this.propertyName = propertyName;

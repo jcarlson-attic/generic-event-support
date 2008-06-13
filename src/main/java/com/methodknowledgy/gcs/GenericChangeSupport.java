@@ -24,7 +24,6 @@ public class GenericChangeSupport<Source> {
             T newValue) {
 
         if (oldValue != newValue) {
-            // Both new and old are the same
 
             // Construct a change object
             GenericChangeEvent<Source, T> change = new GenericChangeEvent<Source, T>(

@@ -5,3 +5,4 @@ Ideas for features:
 * Property/Listener pair - so a listener can identify what property it is listening for
 * Automatic register/unregister collections
 * Prevent registering the same listener multiple times
+* Auto-generate GWT-compatible subclasses of beans with GCS for beans-style setters

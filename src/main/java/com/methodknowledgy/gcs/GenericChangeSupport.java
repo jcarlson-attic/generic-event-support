@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class GenericChangeSupport<Source> {
+public class GenericChangeSupport<Source> implements Bindable<Source> {
 
     private Source source;
 
@@ -54,8 +54,6 @@ public class GenericChangeSupport<Source> {
     }
 
     public void addChangeListener(GenericChangeListener<Source, Object> listener) {
-        // General purpose listeners will be stored in the map with a two-part
-        // key of Object-null
         addChangeListener(null, listener);
     }
 
@@ -69,7 +67,24 @@ public class GenericChangeSupport<Source> {
             List<GenericChangeListener<Source, ?>> l = new ArrayList<GenericChangeListener<Source, ?>>();
             map.get(listener.clazz()).put(propertyName, l);
         }
-        map.get(listener.clazz()).get(propertyName).add(listener);
+        if (!map.get(listener.clazz()).get(propertyName).contains(listener)) {
+            map.get(listener.clazz()).get(propertyName).add(listener);
+        }
     }
 
+	public void removeChangeListener(
+			GenericChangeListener<Source, Object> listener) {
+		removeChangeListener(null, listener);
+	}
+
+	public void removeChangeListener(String propertyName,
+			GenericChangeListener<Source, ?> listener) {
+        if (map.containsKey(listener.clazz())) {
+            if (map.get(listener.clazz()).containsKey(propertyName)) {
+                map.get(listener.clazz()).get(propertyName).remove(listener);
+            }
+        }
+	}
+
+    
 }

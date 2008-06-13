@@ -4,4 +4,6 @@ public interface GenericChangeListener<SourceType, PropertyType> {
 
     void onChange(GenericChangeEvent<SourceType, PropertyType> change);
     
+    Class<?> clazz();
+    
 }

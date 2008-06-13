@@ -1,30 +1,73 @@
 package com.methodknowledgy.gcs;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class GenericChangeSupport<Source> {
 
     private Source source;
 
-    private List<GenericChangeListener<Source, ?>> listeners = new ArrayList<GenericChangeListener<Source, ?>>();
+    private Map<Class<?>, Map<String, List<GenericChangeListener<Source, ?>>>> map = new HashMap<Class<?>, Map<String, List<GenericChangeListener<Source, ?>>>>();
 
-    @SuppressWarnings("unchecked")
+    public GenericChangeSupport(Source source) {
+        this.source = source;
+    }
+
     public <T> void firePropertyChange(String propertyName, T oldValue,
             T newValue) {
 
-        GenericChangeEvent<Source, T> event = new GenericChangeEvent<Source, T>(
-                source, propertyName, oldValue, newValue);
+        if (oldValue != newValue) {
+            // Both new and old are the same
 
-        for (GenericChangeListener<Source, ?> listener : listeners) {
-            ((GenericChangeListener<Source, T>) listener).onChange(event);
+            // Construct a change object
+            GenericChangeEvent<Source, T> change = new GenericChangeEvent<Source, T>(
+                    source, propertyName, oldValue, newValue);
+
+            Class<? extends Object> key = (oldValue != null) ? oldValue
+                    .getClass() : newValue.getClass();
+
+            // Notify field-level listeners first
+            if (map.containsKey(key)) {
+                if (map.get(key).containsKey(propertyName)) {
+                    // TODO: notify Class/property listeners
+                    System.out
+                            .println("Field-level listeners are being notified with change: "
+                                    + change.toString());
+                }
+            }
+
+            // Then notify general listeners
+            if (map.containsKey(Object.class)) {
+                if (map.get(Object.class).containsKey(null)) {
+                    // TODO: notify Object/null listeners
+                    System.out
+                            .println("Object-level listeners are being notified with change: "
+                                    + change.toString());
+                }
+            }
         }
 
     }
 
-    public void addChangeListener(
-            GenericChangeListener<Source, ?> listener) {
-        listeners.add(listener);
+    public void addChangeListener(GenericChangeListener<Source, Object> listener) {
+        // General purpose listeners will be stored in the map with a two-part
+        // key of Object-null
+        addChangeListener(null, listener);
+    }
+
+    public <T> void addChangeListener(String propertyName,
+            GenericChangeListener<Source, T> listener) {
+        if (!map.containsKey(listener.clazz())) {
+            Map<String, List<GenericChangeListener<Source, ?>>> m = new HashMap<String, List<GenericChangeListener<Source, ?>>>();
+            map.put(listener.clazz(), m);
+        }
+        if (!map.get(listener.clazz()).containsKey(propertyName)) {
+            List<GenericChangeListener<Source, ?>> l = new ArrayList<GenericChangeListener<Source, ?>>();
+            map.get(listener.clazz()).put(propertyName, l);
+        }
+        map.get(listener.clazz()).get(propertyName).add(listener);
     }
 
 }

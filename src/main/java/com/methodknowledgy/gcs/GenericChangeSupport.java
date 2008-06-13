@@ -5,21 +5,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 public class GenericChangeSupport<Source> {
-
-    private static Log log = LogFactory.getLog(GenericChangeSupport.class);
 
     private Source source;
 
-    private Map<Class<?>, Map<String, List<GenericChangeListener<Source, ?>>>> map = new HashMap<Class<?>, Map<String, List<GenericChangeListener<Source, ?>>>>();
+    private Map<Class<?>, Map<String, List<GenericChangeListener<Source, ? extends Object>>>> map = new HashMap<Class<?>, Map<String, List<GenericChangeListener<Source, ? extends Object>>>>();
 
     public GenericChangeSupport(Source source) {
         this.source = source;
     }
 
+    @SuppressWarnings("unchecked")
     public <T> void firePropertyChange(String propertyName, T oldValue,
             T newValue) {
 
@@ -35,20 +31,22 @@ public class GenericChangeSupport<Source> {
             // Notify field-level listeners first
             if (map.containsKey(key)) {
                 if (map.get(key).containsKey(propertyName)) {
-                    // TODO: notify Class/property listeners
-                    log
-                            .info("Field-level listeners are being notified with change: "
-                                    + change.toString());
+                    List<GenericChangeListener<Source, ? extends Object>> listeners = map.get(
+                            key).get(propertyName);
+                    for (GenericChangeListener<Source, ?> listener : listeners) {
+                        ((GenericChangeListener<Source, T>) listener).onChange(change);
+                    }
                 }
             }
 
             // Then notify general listeners
             if (map.containsKey(Object.class)) {
                 if (map.get(Object.class).containsKey(null)) {
-                    // TODO: notify Object/null listeners
-                    log
-                            .info("Object-level listeners are being notified with change: "
-                                    + change.toString());
+                    List<GenericChangeListener<Source, ? extends Object>> listeners = map
+                            .get(Object.class).get(null);
+                    for (GenericChangeListener<Source, ?> listener : listeners) {
+                        ((GenericChangeListener<Source, T>) listener).onChange(change);
+                    }
                 }
             }
         }
@@ -61,8 +59,8 @@ public class GenericChangeSupport<Source> {
         addChangeListener(null, listener);
     }
 
-    public <T> void addChangeListener(String propertyName,
-            GenericChangeListener<Source, T> listener) {
+    public void addChangeListener(String propertyName,
+            GenericChangeListener<Source, ?> listener) {
         if (!map.containsKey(listener.clazz())) {
             Map<String, List<GenericChangeListener<Source, ?>>> m = new HashMap<String, List<GenericChangeListener<Source, ?>>>();
             map.put(listener.clazz(), m);

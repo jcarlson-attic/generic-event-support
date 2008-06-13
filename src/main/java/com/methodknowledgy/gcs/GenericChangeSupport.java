@@ -7,7 +7,7 @@ public class GenericChangeSupport<Source> {
 
     private Source source;
 
-    private List<GenericChangeListener<Source, ? extends Object>> listeners = new ArrayList<GenericChangeListener<Source, ? extends Object>>();
+    private List<GenericChangeListener<Source, ?>> listeners = new ArrayList<GenericChangeListener<Source, ?>>();
 
     @SuppressWarnings("unchecked")
     public <T> void firePropertyChange(String propertyName, T oldValue,
@@ -16,14 +16,14 @@ public class GenericChangeSupport<Source> {
         GenericChangeEvent<Source, T> event = new GenericChangeEvent<Source, T>(
                 source, propertyName, oldValue, newValue);
 
-        for (GenericChangeListener<Source, ? extends Object> listener : listeners) {
+        for (GenericChangeListener<Source, ?> listener : listeners) {
             ((GenericChangeListener<Source, T>) listener).onChange(event);
         }
 
     }
 
     public void addChangeListener(
-            GenericChangeListener<Source, ? extends Object> listener) {
+            GenericChangeListener<Source, ?> listener) {
         listeners.add(listener);
     }
 

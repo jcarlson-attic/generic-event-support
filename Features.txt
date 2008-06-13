@@ -1,0 +1,7 @@
+Ideas for features:
+
+* Automate logging of change notifications
+* Support GWT-specific GWT.log() logging, or find commons-logging support for GWT
+* Property/Listener pair - so a listener can identify what property it is listening for
+* Automatic register/unregister collections
+* Prevent registering the same listener multiple times

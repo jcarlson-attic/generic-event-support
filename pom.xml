@@ -9,7 +9,7 @@
 	<artifactId>generic-change-support</artifactId>
 	<name>Generics Change Support</name>
 	<version>0.0.1-SNAPSHOT</version>
-	<description />
+	<description/>
 
 	<scm>
 		<developerConnection>
@@ -32,5 +32,10 @@
 			<version>4.4</version>
 			<scope>test</scope>
 		</dependency>
-	</dependencies>
+	  <dependency>
+      <groupId>commons-logging</groupId>
+      <artifactId>commons-logging</artifactId>
+      <version>1.1.1</version>
+    </dependency>
+  </dependencies>
 </project>

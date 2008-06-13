@@ -5,7 +5,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 public class GenericChangeSupport<Source> {
+
+    private static Log log = LogFactory.getLog(GenericChangeSupport.class);
 
     private Source source;
 
@@ -32,8 +37,8 @@ public class GenericChangeSupport<Source> {
             if (map.containsKey(key)) {
                 if (map.get(key).containsKey(propertyName)) {
                     // TODO: notify Class/property listeners
-                    System.out
-                            .println("Field-level listeners are being notified with change: "
+                    log
+                            .info("Field-level listeners are being notified with change: "
                                     + change.toString());
                 }
             }
@@ -42,8 +47,8 @@ public class GenericChangeSupport<Source> {
             if (map.containsKey(Object.class)) {
                 if (map.get(Object.class).containsKey(null)) {
                     // TODO: notify Object/null listeners
-                    System.out
-                            .println("Object-level listeners are being notified with change: "
+                    log
+                            .info("Object-level listeners are being notified with change: "
                                     + change.toString());
                 }
             }

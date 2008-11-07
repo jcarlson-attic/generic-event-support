@@ -106,7 +106,7 @@ public class SimpleBeanTest {
         b.addChangeListener("title", listener);
         
         b.setTitle("New Title");
-        Assert.assertTrue(passTest);
+        Assert.assertFalse(passTest);
         
         // TODO: What happens when you register for notification on an interface, but an impl sub-class is changed?
     }

@@ -1,6 +1,6 @@
-package com.methodknowledgy.gcs;
+package com.methodknowledgy.events;
 
-public class GenericChangeEvent<SourceType, PropertyType> {
+public class ChangeEvent<SourceType, PropertyType> {
 
 	private SourceType source;
 	private String propertyName;
@@ -8,12 +8,12 @@ public class GenericChangeEvent<SourceType, PropertyType> {
 	private PropertyType newValue;
 	private String message;
 
-	public GenericChangeEvent(SourceType source, String propertyName,
+	public ChangeEvent(SourceType source, String propertyName,
 			PropertyType oldValue, PropertyType newValue) {
 		this(source, propertyName, oldValue, newValue, null);
 	}
 
-	public GenericChangeEvent(SourceType source, String propertyName,
+	public ChangeEvent(SourceType source, String propertyName,
 			PropertyType oldValue, PropertyType newValue, String message) {
 		this.source = source;
 		this.propertyName = propertyName;

@@ -1,8 +1,10 @@
-package com.methodknowledgy.gcs;
+package com.methodknowledgy.events;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import com.methodknowledgy.events.ChangeListener;
 
 import beans.SimpleBean;
 
@@ -19,9 +21,9 @@ public class SimpleBeanTest {
     public void objectLevelListenerTest() {
         SimpleBean b = new SimpleBean();
         
-        GenericChangeListener<SimpleBean, Object> l = new GenericChangeListener<SimpleBean, Object>() {
+        ChangeListener<SimpleBean, Object> l = new ChangeListener<SimpleBean, Object>() {
 
-            public void onChange(GenericChangeEvent<SimpleBean, Object> change) {
+            public void onChange(ChangeEvent<SimpleBean, Object> change) {
                 Assert.assertEquals(null, change.getOldValue());
                 Assert.assertEquals("New Title", change.getNewValue());
                 passTest = true;
@@ -42,9 +44,9 @@ public class SimpleBeanTest {
     public void listenerRegistrationTest() {
         SimpleBean b = new SimpleBean();
         
-        b.addChangeListener(new GenericChangeListener<SimpleBean, Object>() {
+        b.addChangeListener(new ChangeListener<SimpleBean, Object>() {
 
-            public void onChange(GenericChangeEvent<SimpleBean, Object> change) {
+            public void onChange(ChangeEvent<SimpleBean, Object> change) {
             }
 
             public Class<Object> clazz() {
@@ -52,9 +54,9 @@ public class SimpleBeanTest {
             }
             
         });
-        b.addChangeListener("title", new GenericChangeListener<SimpleBean, String>() {
+        b.addChangeListener("title", new ChangeListener<SimpleBean, String>() {
 
-            public void onChange(GenericChangeEvent<SimpleBean, String> change) {
+            public void onChange(ChangeEvent<SimpleBean, String> change) {
             }
 
             public Class<String> clazz() {
@@ -70,8 +72,8 @@ public class SimpleBeanTest {
     @Test
     public void listenerRemovalTest() {
     	SimpleBean b = new SimpleBean();
-    	GenericChangeListener<SimpleBean, Object> listener = new GenericChangeListener<SimpleBean, Object>() {
-            public void onChange(GenericChangeEvent<SimpleBean, Object> change) {
+    	ChangeListener<SimpleBean, Object> listener = new ChangeListener<SimpleBean, Object>() {
+            public void onChange(ChangeEvent<SimpleBean, Object> change) {
             	Assert.fail();
             }
             public Class<Object> clazz() {
@@ -94,8 +96,8 @@ public class SimpleBeanTest {
     @Test
     public void incorrectSourceTypeTest() {
     	SimpleBean b = new SimpleBean();
-    	GenericChangeListener<SimpleBean, Integer> listener = new GenericChangeListener<SimpleBean, Integer>() {
-            public void onChange(GenericChangeEvent<SimpleBean, Integer> change) {
+    	ChangeListener<SimpleBean, Integer> listener = new ChangeListener<SimpleBean, Integer>() {
+            public void onChange(ChangeEvent<SimpleBean, Integer> change) {
             	Assert.assertNotNull(change.getNewValue());
             	passTest = true;
             }

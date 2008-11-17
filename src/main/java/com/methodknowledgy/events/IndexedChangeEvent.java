@@ -1,15 +1,15 @@
-package com.methodknowledgy.gcs;
+package com.methodknowledgy.events;
 
-public class IndexedGenericChangeEvent<SourceType, PropertyType> extends GenericChangeEvent<SourceType, PropertyType> {
+public class IndexedChangeEvent<SourceType, PropertyType> extends ChangeEvent<SourceType, PropertyType> {
 
     private int index;
     
-    public IndexedGenericChangeEvent(SourceType source, String propertyName,
+    public IndexedChangeEvent(SourceType source, String propertyName,
             PropertyType oldValue, PropertyType newValue, int index) {
         this(source, propertyName, oldValue, newValue, null, index);
     }
     
-    public IndexedGenericChangeEvent(SourceType source, String propertyName,
+    public IndexedChangeEvent(SourceType source, String propertyName,
             PropertyType oldValue, PropertyType newValue, String message, int index) {
         super(source, propertyName, oldValue, newValue, message);
         this.index = index;

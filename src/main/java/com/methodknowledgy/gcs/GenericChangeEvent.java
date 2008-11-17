@@ -10,7 +10,7 @@ public class GenericChangeEvent<SourceType, PropertyType> {
 
 	public GenericChangeEvent(SourceType source, String propertyName,
 			PropertyType oldValue, PropertyType newValue) {
-		this(source, propertyName, oldValue, newValue, "");
+		this(source, propertyName, oldValue, newValue, null);
 	}
 
 	public GenericChangeEvent(SourceType source, String propertyName,

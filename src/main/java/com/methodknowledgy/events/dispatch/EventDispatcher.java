@@ -8,21 +8,21 @@ import com.methodknowledgy.events.impl.ChangeEvent;
 
 public class EventDispatcher {
 
-	private static List<Subscription> instance = new ArrayList<Subscription>();
+	private static List<Subscriber> instance = new ArrayList<Subscriber>();
 
 	private EventDispatcher() {
 	}
 
-	public static void register(Subscription subscription) {
+	public static void register(Subscriber subscription) {
 		instance.add(subscription);
 	}
 
-	public static void unregister(Subscription subscription) {
+	public static void unregister(Subscriber subscription) {
 		instance.remove(subscription);
 	}
 
 	public static <E extends Event<?, ?>> void dispatch(E event) {
-		for (Subscription subscription : instance) {
+		for (Subscriber subscription : instance) {
 		    if (subscription.handles(event)) {
 		        subscription.handle(event);
 		    }

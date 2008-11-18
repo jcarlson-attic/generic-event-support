@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>com.methodknowledgy</groupId>
@@ -8,13 +8,11 @@
 	</parent>
 	<artifactId>generic-event-support</artifactId>
 	<name>Generics Event Support</name>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.1.0-beta</version>
 	<description />
 
 	<scm>
-		<developerConnection>
-			scm:svn:http://svn.assembla.com/svn/mkdev/GenericEventSupport/trunk
-		</developerConnection>
+		<developerConnection>scm:svn:http://svn.assembla.com/svn/mkdev/GenericEventSupport/tags/generic-event-support-0.1.0-beta</developerConnection>
 	</scm>
 
 	<repositories>

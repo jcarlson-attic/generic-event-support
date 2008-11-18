@@ -1,6 +1,8 @@
-package com.methodknowledgy.events;
+package com.methodknowledgy.events.impl;
 
-public class ChangeEvent<SourceType, PropertyType> {
+import com.methodknowledgy.events.Event;
+
+public class ChangeEvent<SourceType, PropertyType> implements Event<SourceType, PropertyType> {
 
 	private SourceType source;
 	private String propertyName;
@@ -19,7 +21,7 @@ public class ChangeEvent<SourceType, PropertyType> {
 		this.propertyName = propertyName;
 		this.oldValue = oldValue;
 		this.newValue = newValue;
-		this.message = message == null ? "" : message;
+		this.message = message;
 	}
 
 	public SourceType getSource() {

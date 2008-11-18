@@ -1,4 +1,5 @@
-package com.methodknowledgy.events;
+package com.methodknowledgy.events.bean;
+
 
 public interface Bindable<Source> {
 	

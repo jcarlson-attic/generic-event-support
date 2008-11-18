@@ -1,4 +1,4 @@
-package com.methodknowledgy.events;
+package com.methodknowledgy.events.impl;
 
 public class IndexedChangeEvent<SourceType, PropertyType> extends ChangeEvent<SourceType, PropertyType> {
 

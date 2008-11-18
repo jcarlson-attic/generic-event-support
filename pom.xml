@@ -4,16 +4,16 @@
 	<parent>
 		<groupId>com.methodknowledgy</groupId>
 		<artifactId>pom-parent</artifactId>
-		<version>1.0.2</version>
+		<version>1.0.8</version>
 	</parent>
-	<artifactId>generic-change-support</artifactId>
-	<name>Generics Change Support</name>
+	<artifactId>generic-event-support</artifactId>
+	<name>Generics Event Support</name>
 	<version>0.0.1-SNAPSHOT</version>
-	<description/>
+	<description />
 
 	<scm>
 		<developerConnection>
-			scm:svn:http://svn2.assembla.com/svn/mkdev/GenericChangeSupport/trunk
+			scm:svn:http://svn.assembla.com/svn/mkdev/GenericEventSupport/trunk
 		</developerConnection>
 	</scm>
 
@@ -26,16 +26,21 @@
 	</repositories>
 
 	<dependencies>
+
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.4</version>
 			<scope>test</scope>
 		</dependency>
-	  <dependency>
-      <groupId>commons-logging</groupId>
-      <artifactId>commons-logging</artifactId>
-      <version>1.1.1</version>
-    </dependency>
-  </dependencies>
+
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.1.1</version>
+			<scope>test</scope>
+		</dependency>
+
+	</dependencies>
+
 </project>

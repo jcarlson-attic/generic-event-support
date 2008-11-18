@@ -3,9 +3,9 @@ package beans;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.methodknowledgy.events.Bindable;
-import com.methodknowledgy.events.ChangeListener;
-import com.methodknowledgy.events.ChangeSupport;
+import com.methodknowledgy.events.bean.Bindable;
+import com.methodknowledgy.events.bean.ChangeListener;
+import com.methodknowledgy.events.bean.ChangeSupport;
 
 public class SimpleBean implements Bindable<SimpleBean> {
     

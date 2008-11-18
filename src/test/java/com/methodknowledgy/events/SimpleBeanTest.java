@@ -4,7 +4,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.methodknowledgy.events.ChangeListener;
+import com.methodknowledgy.events.bean.ChangeListener;
 
 import beans.SimpleBean;
 
@@ -23,7 +23,7 @@ public class SimpleBeanTest {
         
         ChangeListener<SimpleBean, Object> l = new ChangeListener<SimpleBean, Object>() {
 
-            public void onChange(ChangeEvent<SimpleBean, Object> change) {
+            public void onChange(Event<SimpleBean, Object> change) {
                 Assert.assertEquals(null, change.getOldValue());
                 Assert.assertEquals("New Title", change.getNewValue());
                 passTest = true;
@@ -46,7 +46,7 @@ public class SimpleBeanTest {
         
         b.addChangeListener(new ChangeListener<SimpleBean, Object>() {
 
-            public void onChange(ChangeEvent<SimpleBean, Object> change) {
+            public void onChange(Event<SimpleBean, Object> change) {
             }
 
             public Class<Object> clazz() {
@@ -56,7 +56,7 @@ public class SimpleBeanTest {
         });
         b.addChangeListener("title", new ChangeListener<SimpleBean, String>() {
 
-            public void onChange(ChangeEvent<SimpleBean, String> change) {
+            public void onChange(Event<SimpleBean, String> change) {
             }
 
             public Class<String> clazz() {
@@ -73,7 +73,7 @@ public class SimpleBeanTest {
     public void listenerRemovalTest() {
     	SimpleBean b = new SimpleBean();
     	ChangeListener<SimpleBean, Object> listener = new ChangeListener<SimpleBean, Object>() {
-            public void onChange(ChangeEvent<SimpleBean, Object> change) {
+            public void onChange(Event<SimpleBean, Object> change) {
             	Assert.fail();
             }
             public Class<Object> clazz() {
@@ -97,7 +97,7 @@ public class SimpleBeanTest {
     public void incorrectSourceTypeTest() {
     	SimpleBean b = new SimpleBean();
     	ChangeListener<SimpleBean, Integer> listener = new ChangeListener<SimpleBean, Integer>() {
-            public void onChange(ChangeEvent<SimpleBean, Integer> change) {
+            public void onChange(Event<SimpleBean, Integer> change) {
             	Assert.assertNotNull(change.getNewValue());
             	passTest = true;
             }

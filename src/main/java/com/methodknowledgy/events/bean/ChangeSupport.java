@@ -1,9 +1,12 @@
-package com.methodknowledgy.events;
+package com.methodknowledgy.events.bean;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.methodknowledgy.events.Event;
+import com.methodknowledgy.events.impl.ChangeEvent;
 
 
 public class ChangeSupport<Source> implements Bindable<Source> {
@@ -31,7 +34,7 @@ public class ChangeSupport<Source> implements Bindable<Source> {
 	}
 
 	@SuppressWarnings("unchecked")
-	protected <T> void firePropertyChange(ChangeEvent<Source, T> change) {
+	protected <T> void firePropertyChange(Event<Source, T> change) {
 
 		if (change.getOldValue() != change.getNewValue()) {
 

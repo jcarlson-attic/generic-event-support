@@ -2,7 +2,7 @@ package com.methodknowledgy.events.dispatch;
 
 import com.methodknowledgy.events.Event;
 
-public interface Subscription {
+public interface Subscriber {
 
 	Filter getFilter();
 	

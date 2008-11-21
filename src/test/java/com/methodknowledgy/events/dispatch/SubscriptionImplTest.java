@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.methodknowledgy.events.Event;
+import com.methodknowledgy.events.dispatch.impl.Subscription;
 
 public class SubscriptionImplTest {
 
@@ -14,21 +15,21 @@ public class SubscriptionImplTest {
 	
 	@Test
 	public void subscription_with_positive_filter() {
-		SubscriptionImpl s = new SubscriptionImpl();
+		Subscription s = new Subscription();
 		s.setFilter(getTrueFilter());
 		Assert.assertTrue(s.handles(null));
 	}
 	
 	@Test
 	public void subscription_with_negative_filter() {
-		SubscriptionImpl s = new SubscriptionImpl();
+		Subscription s = new Subscription();
 		s.setFilter(getFalseFilter());
 		Assert.assertFalse(s.handles(null));
 	}
 	
 	@Test
 	public void subscription_with_abstaining_filter() {
-		SubscriptionImpl s = new SubscriptionImpl();
+		Subscription s = new Subscription();
 		s.setFilter(getNullFilter());
 		
 		s.setHandleOnFilterAbstain(true);
@@ -40,13 +41,13 @@ public class SubscriptionImplTest {
 	
 	@Test
 	public void subscription_with_no_filter() {
-		SubscriptionImpl s = new SubscriptionImpl();
+		Subscription s = new Subscription();
 		Assert.assertTrue(s.handles(null));
 	}
 	
 	@Test
 	public void execute_when_valid() {
-		SubscriptionImpl s = new SubscriptionImpl();
+		Subscription s = new Subscription();
 		TestAction action = new TestAction();
 		s.setAction(action);
 		s.handle(null);
@@ -55,7 +56,7 @@ public class SubscriptionImplTest {
 	
 	@Test
 	public void execute_when_not_valid() {
-		SubscriptionImpl s = new SubscriptionImpl();
+		Subscription s = new Subscription();
 		TestAction action = new TestAction();
 		s.setAction(action);
 		s.setFilter(getFalseFilter());

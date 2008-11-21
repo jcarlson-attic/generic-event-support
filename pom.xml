@@ -8,10 +8,10 @@
 	</parent>
 	<artifactId>generic-event-support</artifactId>
 	<name>Generics Event Support</name>
-	<version>0.3.0-beta</version>
+	<version>0.3.0-SNAPSHOT</version>
 	<description />
 	<scm>
-		<developerConnection>scm:svn:http://svn.assembla.com/svn/mkdev/GenericEventSupport/tags/generic-event-support-0.3.0-beta</developerConnection>
+		<developerConnection>scm:svn:http://svn.assembla.com/svn/mkdev/GenericEventSupport/trunk</developerConnection>
 	</scm>
 	<repositories>
 		<repository>

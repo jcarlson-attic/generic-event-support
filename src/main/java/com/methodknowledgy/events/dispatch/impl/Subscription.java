@@ -1,6 +1,9 @@
-package com.methodknowledgy.events.dispatch;
+package com.methodknowledgy.events.dispatch.impl;
 
 import com.methodknowledgy.events.Event;
+import com.methodknowledgy.events.dispatch.Action;
+import com.methodknowledgy.events.dispatch.Filter;
+import com.methodknowledgy.events.dispatch.Subscriber;
 
 
 public class Subscription implements Subscriber {

@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.methodknowledgy.events.Event;
+import com.methodknowledgy.events.dispatch.impl.Subscription;
 
 public class SubscriptionImplTest {
 

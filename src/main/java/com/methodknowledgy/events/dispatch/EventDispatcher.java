@@ -1,14 +1,16 @@
 package com.methodknowledgy.events.dispatch;
 
-import java.util.List;
+
+import java.util.Collection;
 
 import com.methodknowledgy.events.Event;
 import com.methodknowledgy.events.dispatch.impl.SimpleEventDispatcher;
 import com.methodknowledgy.events.impl.ChangeEvent;
 
-public abstract class EventDispatcher {
+public final class EventDispatcher implements IEventDispatcher {
 
     private static EventDispatcher instance;
+    private IEventDispatcher impl;
 
     /**
      * Generally speaking, an application will only ever have one active
@@ -21,10 +23,7 @@ public abstract class EventDispatcher {
      *            <code>true</code> if this instance of an EventDispatcher
      *            should become the default EventDispatcher.
      */
-    protected EventDispatcher(boolean setAsEventDispatcher) {
-        if (setAsEventDispatcher) {
-            setInstance(this);
-        }
+    private EventDispatcher() {
     }
 
     /**
@@ -33,15 +32,22 @@ public abstract class EventDispatcher {
      */
     public static final EventDispatcher getInstance() {
         if (instance == null) {
-            setInstance(new SimpleEventDispatcher());
+            instance = new EventDispatcher();
         }
         return instance;
+    }
+    
+    private final IEventDispatcher getImplementation() {
+        if (impl == null) {
+            impl = new SimpleEventDispatcher();
+        }
+        return impl;
     }
 
     /**
      * <p>
      * An application can provide a customized implementation of the
-     * EventDispatcher, although the SimpleEventDispatcher will work for most
+     * IEventDispatcher, although the SimpleEventDispatcher will work for most
      * small to medium sized applications.
      * </p>
      * 
@@ -55,25 +61,29 @@ public abstract class EventDispatcher {
      * 
      * @param instance
      */
-    public static final void setInstance(EventDispatcher instance) {
-        if (EventDispatcher.instance != null) {
-            for (Subscriber subscription : getInstance().getSubscriptions()) {
-                instance.registerImpl(subscription);
+    public final void setImplementation(IEventDispatcher impl) {
+        if (this.impl != null) {
+            for (Subscriber subscription : this.impl.getSubscriptions()) {
+                impl.register(subscription);
             }
         }
-        EventDispatcher.instance = instance;
+        this.impl = impl;
     }
 
     public final void register(Subscriber subscription) {
-        registerImpl(subscription);
+        getImplementation().register(subscription);
     }
 
     public final void unregister(Subscriber subscription) {
-        unregisterImpl(subscription);
+        getImplementation().unregister(subscription);
+    }
+    
+    public final void unregisterAllSubscribers() {
+        getImplementation().unregisterAllSubscribers();
     }
 
     public final <E extends Event<?, ?>> void dispatch(E event) {
-        dispatchImpl(event);
+        getImplementation().dispatch(event);
     }
 
     public final <S, T> void dispatch(S source, String propertyName,
@@ -88,16 +98,14 @@ public abstract class EventDispatcher {
         dispatch(event);
     }
 
-    public final List<Subscriber> getSubscriptions() {
-        return getSubscriptionsImpl();
+    public final Collection<Subscriber> getSubscriptions() {
+        return getImplementation().getSubscriptions();
+    }
+    
+    public static final void reset() {
+        getInstance().unregisterAllSubscribers();
+        getInstance().impl = null;
     }
 
-    protected abstract void registerImpl(Subscriber subscription);
-
-    protected abstract void unregisterImpl(Subscriber subscription);
-
-    protected abstract List<Subscriber> getSubscriptionsImpl();
-
-    protected abstract <E extends Event<?, ?>> void dispatchImpl(E event);
 
 }

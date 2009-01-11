@@ -4,6 +4,10 @@ import com.methodknowledgy.events.Event;
 
 public class ChangeEvent<SourceType, PropertyType> implements Event<SourceType, PropertyType> {
 
+    // TODO Combine ChangeEvent with ChangeSupport to take advantage of redundant code
+    // TODO ChangeSupport cancels the change if the old and new values are the same. This should also.
+    // TODO Create a NotifyEvent that can be used for occurrence notifications
+    
 	private SourceType source;
 	private String propertyName;
 	private PropertyType oldValue;
@@ -42,6 +46,19 @@ public class ChangeEvent<SourceType, PropertyType> implements Event<SourceType, 
 
 	public String getMessage() {
 		return message;
+	}
+	
+	@Override
+	public String toString() {
+	    if (message != null && message != "") {
+	        return message;
+	    }
+        StringBuffer sb = new StringBuffer();
+        sb.append("Source: " + getSource() + "; ");
+        sb.append("Property: " + getPropertyName() + "; ");
+        sb.append("Old Value: " + getOldValue() + "; ");
+        sb.append("New Value: " + getNewValue() + "; ");
+        return sb.toString();
 	}
 
 }

@@ -65,6 +65,7 @@ public class SimpleBeanTest {
             
         });
         b.setTitle("New title");
+        // TODO: WTF does this test do?
         passTest = true;
         Assert.assertTrue(passTest);
     }
@@ -90,7 +91,7 @@ public class SimpleBeanTest {
     
     @Test
     public void multipleRegistrationsTest() {
-    	
+    	// TODO Flesh out test
     }
     
     @Test
